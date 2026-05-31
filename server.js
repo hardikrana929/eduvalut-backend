@@ -8,6 +8,7 @@ const SemesterRouter = require("./Routes/SemesterRouter");
 const FeedbackRouter = require("./Routes/FeedbackRouter");
 const pdfRouter = require("./Routes/pdfRouter");
 const PaperRouter = require("./Routes/PaperRouter");
+const PasswordRouter = require("./Routes/PasswordRouter");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -19,6 +20,8 @@ app.use("/api/semester", SemesterRouter);
 app.use("/api/feedback", FeedbackRouter);
 app.use("/api/pdf", pdfRouter);
 app.use("/api/paper", PaperRouter);
+app.use("/api/pass", PasswordRouter);
+
 app.listen(3000, () => {
   console.log("Server started on port 3000...");
 });
