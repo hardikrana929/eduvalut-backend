@@ -12,7 +12,8 @@ const PasswordRouter = require("./routes/PasswordRouter");
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: "https://eduvalut-backend.vercel.app/",
+  origin: "https://eduvalut-frontend.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
 app.use(express.urlencoded({ extended: true }));
