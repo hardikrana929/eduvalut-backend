@@ -14,24 +14,31 @@ const PasswordRouter = require("./routes/PasswordRouter");
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-
+// CORS
 app.use(cors({
-  origin: "https://eduvalut-frontend.vercel.app",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
+app.options("*", cors());
+
+// BODY PARSER
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static Files
+// STATIC
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "public/uploads"))
 );
 
-// Routes
+// TEST ROUTE
+app.get("/", (req, res) => {
+  res.send("Backend Running...");
+});
+
+// ROUTES
 app.use("/api/student", StdRoute);
 app.use("/api/branch", BranchRouter);
 app.use("/api/semester", SemesterRouter);
@@ -40,9 +47,14 @@ app.use("/api/pdf", pdfRouter);
 app.use("/api/paper", PaperRouter);
 app.use("/api/pass", PasswordRouter);
 
-// Root Route
-app.get("/", (req, res) => {
-  res.send("EduVault Backend Running...");
+// ERROR HANDLER
+app.use((err, req, res, next) => {
+  console.log(err);
+
+  res.status(500).json({
+    success: false,
+    message: err.message,
+  });
 });
 
 module.exports = app;
