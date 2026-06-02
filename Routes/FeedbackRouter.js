@@ -5,10 +5,10 @@ const {
   createFeedback,
   getFeedback,
   delteFeedback,
-} = require("../Controllers/feedbackController");
+} = require("../controllers/feedbackController");
 
-const auth = require("../Middlware/AuthMiddlware");
-const adminAuth = require("../Middlware/AdminMiddlware");
+const auth = require("../middleware/AuthMiddlware");
+const adminAuth = require("../middleware/AdminMiddlware");
 
 router.get("/getFeedback", adminAuth, getFeedback);
 

@@ -2,16 +2,19 @@ const path = require("path");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const StdRoute = require("./Routes/StdRoute");
-const BranchRouter = require("./Routes/BranchRouter");
-const SemesterRouter = require("./Routes/SemesterRouter");
-const FeedbackRouter = require("./Routes/FeedbackRouter");
-const pdfRouter = require("./Routes/pdfRouter");
-const PaperRouter = require("./Routes/PaperRouter");
-const PasswordRouter = require("./Routes/PasswordRouter");
+const StdRoute = require("./routes/StdRoute");
+const BranchRouter = require("./routes/BranchRouter");
+const SemesterRouter = require("./routes/SemesterRouter");
+const FeedbackRouter = require("./routes/FeedbackRouter");
+const pdfRouter = require("./routes/pdfRouter");
+const PaperRouter = require("./routes/PaperRouter");
+const PasswordRouter = require("./routes/PasswordRouter");
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://eduvalut-backend.vercel.app/",
+  credentials: true,
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use("/api/student", StdRoute);

@@ -5,20 +5,20 @@ const supabase = require("../config/supabase");
 const uploadPaper = async (req, res) => {
     try {
         const { subjectName, branchId, semesterId, year, uploadedBy } = req.body;
-        const file = req.file;
-        if (!file) {
+        const pdfs = req.file;
+        if (!pdfs) {
             return res.status(400).json({
                 message: "No file Uploaded.",
             })
         }
-        const cleanName = file.originalname
+        const cleanName = pdfs.originalname
             .replace(/\s+/g, "-")
             .replace(/[^a-zA-Z0-9.-]/g, "");
 
         const fileName = `${Date.now()}-${cleanName}`;
         const { data, error } = await supabase.storage
             .from("pdfs")
-            .upload(fileName, file.buffer, {
+            .upload(fileName, pdfs.buffer, {
                 contentType: "application/pdf",
                 upsert: false,
             });

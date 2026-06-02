@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../Middlware/AdminMiddlware");
+const auth = require("../middleware/AdminMiddlware");
 const {
   addSemester,
   updateSemester,
   removeSemester,
   getSemester,
   getOneSemester,
-} = require("../Controllers/SemesterController");
+} = require("../controllers/SemesterController");
 
 router.get("/getSemester", getSemester);
 

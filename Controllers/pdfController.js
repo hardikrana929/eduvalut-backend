@@ -90,7 +90,6 @@ const uploadPdf = async (req, res) => {
         error: error.message,
       });
     }
-
     const { data: publicUrlData } = supabase.storage
       .from("pdfs")
       .getPublicUrl(fileName);

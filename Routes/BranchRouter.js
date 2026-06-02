@@ -10,14 +10,14 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../Middlware/AdminMiddlware");
+const auth = require("../middleware/AdminMiddlware");
 const {
   addBranch,
   changeBranch,
   removeBranch,
   getBranch,
   getoneBranch,
-} = require("../Controllers/BranchController");
+} = require("../controllers/BranchController");
 
 router.get("/getBranch", getBranch);
 

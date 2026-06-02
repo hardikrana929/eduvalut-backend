@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { forgotPassword, verifyOtp, resetPassword } = require("../Controllers/resetPasswordController");
+const { forgotPassword, verifyOtp, resetPassword } = require("../controllers/resetPasswordController");
 
 router.post("/forgotPass", forgotPassword);
 
