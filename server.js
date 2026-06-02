@@ -4,7 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const StdRoute = require("./routes/StdRoute");
+const StdRoute = require("./routes/stdRoute");
 const BranchRouter = require("./routes/BranchRouter");
 const SemesterRouter = require("./routes/SemesterRouter");
 const FeedbackRouter = require("./routes/FeedbackRouter");
