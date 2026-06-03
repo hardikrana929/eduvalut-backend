@@ -16,9 +16,10 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: "https://eduvalut-backend.vercel.app/",
+  origin: "https://eduvalut-frontend.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 
 app.options("/{*path}", cors());
