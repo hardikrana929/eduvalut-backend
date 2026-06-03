@@ -19,4 +19,7 @@ router.post("/login-student", (req, res, next) => {
   next();
 }, studentLogin);
 
+router.get("/test", (req, res) => {
+  res.json({ success: true });
+});
 module.exports = router;
