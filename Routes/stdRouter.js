@@ -12,6 +12,6 @@ router.post("/signup-student", stdSignup);
 
 router.post("/signup-admin", adminSignup);
 
-router.post("/login-student", studentLogin);
+router.post("/loginstudent", studentLogin);
 
 module.exports = router;
