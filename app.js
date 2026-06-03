@@ -4,13 +4,13 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const stdRouter = require("./routes/stdRouter");
-const BranchRouter = require("./routes/BranchRouter");
-const SemesterRouter = require("./routes/SemesterRouter");
-const FeedbackRouter = require("./routes/FeedbackRouter");
-const pdfRouter = require("./routes/pdfRouter");
-const PaperRouter = require("./routes/PaperRouter");
-const PasswordRouter = require("./routes/PasswordRouter");
+const stdRouter = require("./Routes/stdRouter");
+const BranchRouter = require("./Routes/BranchRouter");
+const SemesterRouter = require("./Routes/SemesterRouter");
+const FeedbackRouter = require("./Routes/FeedbackRouter");
+const pdfRouter = require("./Routes/pdfRouter");
+const PaperRouter = require("./Routes/PaperRouter");
+const PasswordRouter = require("./Routes/PasswordRouter");
 
 const app = express();
 
