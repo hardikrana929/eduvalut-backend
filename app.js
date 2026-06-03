@@ -16,12 +16,12 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: "*",
+  origin: "https://eduvalut-backend.vercel.app/",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-app.options("*", cors());
+app.options("/{*path}", cors());
 
 // BODY PARSER
 app.use(express.json());
