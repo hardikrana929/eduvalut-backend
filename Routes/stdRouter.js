@@ -6,7 +6,7 @@ const {
   stdSignup,
   adminSignup,
   studentLogin,
-} = require("../controllers/stdController");
+} = require("../Controllers/stdController");
 
 router.post("/signup-student", stdSignup);
 

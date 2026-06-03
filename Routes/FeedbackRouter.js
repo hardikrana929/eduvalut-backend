@@ -5,7 +5,7 @@ const {
   createFeedback,
   getFeedback,
   delteFeedback,
-} = require("../controllers/feedbackController");
+} = require("../Controllers/feedbackController");
 
 const auth = require("../middleware/AuthMiddlware");
 const adminAuth = require("../middleware/AdminMiddlware");

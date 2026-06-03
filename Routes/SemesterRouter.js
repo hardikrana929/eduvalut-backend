@@ -7,7 +7,7 @@ const {
   removeSemester,
   getSemester,
   getOneSemester,
-} = require("../controllers/SemesterController");
+} = require("../Controllers/SemesterController");
 
 router.get("/getSemester", getSemester);
 

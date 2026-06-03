@@ -17,7 +17,7 @@ const {
   removeBranch,
   getBranch,
   getoneBranch,
-} = require("../controllers/BranchController");
+} = require("../Controllers/BranchController");
 
 router.get("/getBranch", getBranch);
 
