@@ -13,13 +13,12 @@ router.post("/signup-student", stdSignup);
 router.post("/signup-admin", adminSignup);
 
 // router.post("/login-student", studentLogin);
-router.post("/login-student", (req, res, next) => {
-  console.log("LOGIN ROUTE HIT");
-  console.log(req.body);
-  next();
-}, studentLogin);
+router.post("/login-student", studentLogin);
 
 router.get("/test", (req, res) => {
-  res.json({ success: true });
+  res.json({
+    success: true,
+    message: "Student router working"
+  });
 });
 module.exports = router;
