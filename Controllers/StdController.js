@@ -80,6 +80,7 @@ const studentLogin = async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
+        fullname: user.fullname,
         email: user.email,
         role: user.role,
       },
