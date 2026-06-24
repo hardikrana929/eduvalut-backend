@@ -12,6 +12,7 @@ const AuthMiddlware = async (req, res, next) => {
 
     const token = auth.split(" ")[1];
     const verifyJwt = jwt.verify(token, process.env.JWT_KEY);
+    console.log("Decoded JWT:", verifyJwt);
     req.user = verifyJwt;
 
     next();
