@@ -170,8 +170,6 @@ const updatePdf = async (req, res) => {
 //Get syllabus pdf
 const getPdfs = async (req, res) => {
   try {
-    console.log("GET PDF API HIT");
-    console.log("USER:", req.user);
     const squery = `
       SELECT 
         syllabus.*,
