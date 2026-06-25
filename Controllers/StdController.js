@@ -47,7 +47,9 @@ const stdSignup = async (req, res) => {
 const studentLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    if (!email || !password) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     // CHECK EMAIL EXISTS
     const query = `
       SELECT * FROM users
@@ -115,7 +117,7 @@ const adminSignup = async (req, res) => {
   try {
     const { fullname, email, password } = req.body;
 
-    // 1. Validation (Always a good idea to check for missing fields)
+    // 1. Validation
     if (!fullname || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }

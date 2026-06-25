@@ -6,6 +6,9 @@ const uploadPaper = async (req, res) => {
     try {
         const { subjectName, branchId, semesterId, year, uploadedBy } = req.body;
         const pdfs = req.file;
+        if (!subjectName || !branchId || !semesterId || !year || !uploadedBy) {
+            return res.status(400).json({ message: "All Fields are required." });
+        }
         if (!pdfs) {
             return res.status(400).json({
                 message: "No file Uploaded.",
@@ -50,7 +53,9 @@ const updatePaper = async (req, res) => {
     try {
         const { id } = req.params;
         const { subjectName, branchId, semesterId, year, uploadedBy } = req.body;
-
+        if (!subjectName || !branchId || !semesterId || !year || !uploadedBy) {
+            return res.status(400).json({ message: "All Fields are required." });
+        }
         //Check admin user exist
         const [adminUser] = await con.query(`select * from users where id = ?`, [uploadedBy]);
         if (adminUser.length === 0) {
@@ -133,7 +138,9 @@ const deletePaper = async (req, res) => {
     try {
 
         const { id } = req.params;
-
+        if (!id) {
+            return res.status(400).json({ message: "All Fields are required." });
+        }
         // Get paper details first
         const [paper] = await con.query(
             `select * from papers where id=?`,

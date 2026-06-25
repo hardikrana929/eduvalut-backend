@@ -45,6 +45,9 @@ const forgotPassword = async (req, res) => {
 const verifyOtp = async (req, res) => {
     try {
         const { email, otp } = req.body;
+        if (!email || !otp) {
+            return res.status(400).json({ message: "All Fields are required." });
+        }
         const [validOtp] = await db.query("select * from password_reset where email =? AND otp =?", [email, otp]);
         if (validOtp.length === 0) {
             return res.status(400).json({
@@ -72,7 +75,9 @@ const verifyOtp = async (req, res) => {
 const resetPassword = async (req, res) => {
     try {
         const { email, newPassword } = req.body;
-
+        if (!email || !newPassword) {
+            return res.status(400).json({ message: "All Fields are required." });
+        }
         //New Password hash
         const hashPass = await bcrypt.hash(newPassword, 10);
 

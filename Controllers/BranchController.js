@@ -61,6 +61,9 @@ const changeBranch = async (req, res) => {
   try {
     const { id } = req.params;
     const { branchName } = req.body;
+    if (!branchName || !id) {
+      return res.status(400).json({ message: "Branch name and ID is required." });
+    }
     const upquery = `update branches set branch_name=? where id=?`;
     con.execute(upquery, [branchName, id]);
     return res.status(200).json({
@@ -78,6 +81,9 @@ const changeBranch = async (req, res) => {
 const removeBranch = (req, res) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     const query = `delete from branches where id=?`;
 
     con.execute(query, [id]);

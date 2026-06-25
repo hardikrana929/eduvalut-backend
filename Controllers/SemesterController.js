@@ -38,7 +38,9 @@ const addSemester = async (req, res) => {
   try {
     const { semesterName } = req.body;
     const query = `insert into semesters(semester_name) values (?)`;
-
+    if (!semesterName) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     con.execute(query, [semesterName]);
     return res.status(201).json({
       message: "Semester created successfully.",
@@ -55,6 +57,9 @@ const updateSemester = async (req, res) => {
   try {
     const { id } = req.params;
     const { semesterName } = req.body;
+    if (!semesterName) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     const upquery = `update semesters set semester_name=? where id=?`;
     con.execute(upquery, [semesterName, id]);
     return res.status(200).json({
@@ -72,6 +77,9 @@ const updateSemester = async (req, res) => {
 const removeSemester = async (req, res) => {
   try {
     const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     const rquery = `delete from semesters where id=?`;
     con.execute(rquery, [id]);
     return res.status(200).json({

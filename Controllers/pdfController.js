@@ -63,7 +63,9 @@ const supabase = require("../config/supabase");
 const uploadPdf = async (req, res) => {
   try {
     const { title, branchId, semesterId, syllabusType, uploadedBy } = req.body;
-
+    if (!title || !branchId || !semesterId || !syllabusType || !uploadedBy) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     const file = req.file;
 
     if (!file) {
@@ -124,7 +126,9 @@ const updatePdf = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, branchId, semesterId, uploadedBy, syllabusType } = req.body;
-
+    if (!title || !branchId || !semesterId || !syllabusType || !uploadedBy) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     // 1. Prevent Foreign Key Error: Check if the user (uploaded_by) actually exists
     const [userCheck] = await con.query("select id from users where id = ?", [uploadedBy]);
     if (userCheck.length === 0) {
@@ -214,7 +218,9 @@ const getOnePdfs = async (req, res) => {
 const deletePdf = async (req, res) => {
   try {
     const { id } = req.params;
-
+    if (!id) {
+      return res.status(400).json({ message: "All Fields are required." });
+    }
     const [isPaper] = await con.query(
       "select * from syllabus where id=?",
       [id]
