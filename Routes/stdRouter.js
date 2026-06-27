@@ -12,7 +12,7 @@ const loginLimiter = rateLimit({
 const signupLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour
   max: 5, // Limit each IP to 5 signup requests per hour
-  message: { message: "Too many accounts created from this IP. Please try again later." }
+  message: { message: "Too many accounts created from this IP. Please try again after 1 hour." }
 });
 const {
   stdSignup,
@@ -20,7 +20,8 @@ const {
   studentLogin,
 } = require("../Controllers/StdController");
 
-router.post("/signup-student", signupLimiter,// --- Validation Rules ---
+router.post("/signup-student", signupLimiter,
+  //--- Validation Rules-- -
   body('email').isEmail().normalizeEmail(),
   body('password').isLength({ min: 8 }).matches(/[A-Z]/).matches(/[0-9]/),
   body('fullname').trim().isLength({ min: 2, max: 50 }),

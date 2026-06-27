@@ -56,6 +56,7 @@ const verifyOtp = async (req, res) => {
                 message: "OTP Invalid",
             })
         }
+        await db.query("update password_reset set verified=true where email=?", [email]);
 
         const otpData = validOtp[0];
 
