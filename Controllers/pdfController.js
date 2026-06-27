@@ -62,7 +62,7 @@ const supabase = require("../config/supabase");
 // }
 const uploadPdf = async (req, res) => {
   try {
-    const { title, branchId, semesterId, syllabusType, uploadedBy } = req.body;
+    const { title, branchId, semesterId, syllabusType } = req.body;
     const uploadedBy = req.user.id;
     if (!title || !branchId || !semesterId || !syllabusType || !uploadedBy) {
       return res.status(400).json({ message: "All Fields are required." });
@@ -125,7 +125,8 @@ const uploadPdf = async (req, res) => {
 const updatePdf = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, branchId, semesterId, uploadedBy, syllabusType } = req.body;
+    const { title, branchId, semesterId, syllabusType } = req.body;
+    const uploadedBy = req.user.id;
     if (!title || !branchId || !semesterId || !syllabusType || !uploadedBy) {
       return res.status(400).json({ message: "All Fields are required." });
     }

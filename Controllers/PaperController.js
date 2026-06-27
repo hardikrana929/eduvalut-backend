@@ -4,7 +4,8 @@ const supabase = require("../config/supabase");
 //Upload papers
 const uploadPaper = async (req, res) => {
     try {
-        const { subjectName, branchId, semesterId, year, uploadedBy } = req.body;
+        const { subjectName, branchId, semesterId, year } = req.body;
+        const uploadedBy = req.user.id;
         const pdfs = req.file;
         if (!subjectName || !branchId || !semesterId || !year || !uploadedBy) {
             return res.status(400).json({ message: "All Fields are required." });
@@ -50,7 +51,8 @@ const uploadPaper = async (req, res) => {
 const updatePaper = async (req, res) => {
     try {
         const { id } = req.params;
-        const { subjectName, branchId, semesterId, year, uploadedBy } = req.body;
+        const { subjectName, branchId, semesterId, year } = req.body;
+        const uploadedBy = req.user.id;
         if (!subjectName || !branchId || !semesterId || !year || !uploadedBy) {
             return res.status(400).json({ message: "All Fields are required." });
         }
