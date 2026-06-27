@@ -24,10 +24,8 @@ const AdminMiddlware = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(401).json({
-      message: "Authentication Failed! Invalid or expired token.",
-      error: error.message,
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Authentication Failed! Invalid or expired token." });
   }
 };
 

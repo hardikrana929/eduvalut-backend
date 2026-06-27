@@ -104,11 +104,8 @@ const studentLogin = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "Server Error",
-      error: error.message,
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
 
@@ -147,10 +144,8 @@ const adminSignup = async (req, res) => {
       return res.status(400).json({ message: "Email already exists" });
     }
 
-    return res.status(500).json({
-      message: "Server Error",
-      error: err.message,
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
 module.exports = { stdSignup, adminSignup, studentLogin };

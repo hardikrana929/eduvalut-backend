@@ -33,8 +33,13 @@ router.post("/signup-student", signupLimiter,
     }
     next(); // If data is clean, pass control to stdSignup
   }, stdSignup);
-
-router.post("/signup-admin", signupLimiter, adminSignup);
+const ADMIN_INVITE = process.env.ADMIN_INVITE_SECRET;
+router.post("/signup-admin", signupLimiter, (req, res, next) => {
+  if (req.headers['x-invite-token'] !== ADMIN_INVITE) {
+    return res.status(403).json({ message: "Forbidden" });
+  }
+  next();
+}, adminSignup);
 
 router.post("/login-student", loginLimiter, studentLogin);
 

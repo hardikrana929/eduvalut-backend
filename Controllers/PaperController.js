@@ -41,10 +41,8 @@ const uploadPaper = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Server Error",
-            error: error.message,
-        })
+        console.error('[controllerName.functionName]', error); // server log only
+        return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 }
 
@@ -87,10 +85,8 @@ const updatePaper = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Server Error",
-            error: error.message,
-        })
+        console.error('[controllerName.functionName]', error); // server log only
+        return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 }
 
@@ -108,10 +104,8 @@ const getAllPapers = async (req, res) => {
         })
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Server error",
-            error: error.message,
-        })
+        console.error('[controllerName.functionName]', error); // server log only
+        return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 }
 
@@ -126,10 +120,8 @@ const getOnePaper = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Server error",
-            error: error.message,
-        })
+        console.error('[controllerName.functionName]', error); // server log only
+        return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 }
 
@@ -182,10 +174,8 @@ const deletePaper = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Server Error",
-            error: error.message,
-        });
+        console.error('[controllerName.functionName]', error); // server log only
+        return res.status(500).json({ message: "Something went wrong. Please try again." });
     }
 };
 module.exports = { uploadPaper, updatePaper, getAllPapers, getOnePaper, deletePaper };

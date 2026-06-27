@@ -63,6 +63,7 @@ const supabase = require("../config/supabase");
 const uploadPdf = async (req, res) => {
   try {
     const { title, branchId, semesterId, syllabusType, uploadedBy } = req.body;
+    const uploadedBy = req.user.id;
     if (!title || !branchId || !semesterId || !syllabusType || !uploadedBy) {
       return res.status(400).json({ message: "All Fields are required." });
     }
@@ -115,9 +116,8 @@ const uploadPdf = async (req, res) => {
     });
 
   } catch (error) {
-    return res.status(500).json({
-      error: error.message,
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
 
@@ -164,10 +164,8 @@ const updatePdf = async (req, res) => {
     });
 
   } catch (error) {
-    return res.status(500).json({
-      message: "Server Error",
-      error: error.message,
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 }
 
@@ -193,7 +191,8 @@ const getPdfs = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Server error", error: error.message });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 }
 
@@ -207,9 +206,8 @@ const getOnePdfs = async (req, res) => {
       data: result,
     })
   } catch (error) {
-    return res.status(500).json({
-      message: "Server Error",
-    });
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 
 }
@@ -262,12 +260,8 @@ const deletePdf = async (req, res) => {
     });
 
   } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      message: "Server Error",
-    });
-  }
-};
-
+    console.error('[controllerName.functionName]', error); // server log only
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
+  };
+}
 module.exports = { uploadPdf, getPdfs, updatePdf, getOnePdfs, deletePdf };
