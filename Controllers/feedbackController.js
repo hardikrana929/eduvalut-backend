@@ -54,7 +54,7 @@ const getFeedback = async (req, res) => {
 const delteFeedback = async (req, res) => {
   try {
     const { id } = req.params;
-    const deQuer = `delete from feedback where id=${id}`;
+    const deQuer = `delete from feedback where id=?`;
 
     const result = await con.query(deQuer, [id]);
     return res.status(200).json({

@@ -56,7 +56,7 @@ const verifyOtp = async (req, res) => {
                 message: "OTP Invalid",
             })
         }
-        await db.query("update password_reset set verified=true where email=?", [email]);
+        
 
         const otpData = validOtp[0];
 
@@ -66,6 +66,9 @@ const verifyOtp = async (req, res) => {
                 message: "OTP Expire",
             })
         }
+        
+        await db.query("update password_reset set verified=true where email=?", [email]);
+
         return res.status(200).json({
             message: "OTP Verify Successfully.",
         })
