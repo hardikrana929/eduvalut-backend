@@ -14,7 +14,7 @@ const stdSignup = async (req, res) => {
       });
     }
 
-    const hashPassword = await bcrypt.hash(password, 4);
+    const hashPassword = await bcrypt.hash(password, 12);
 
     const inq = `
       INSERT INTO users(fullname, email, password)
@@ -123,7 +123,7 @@ const adminSignup = async (req, res) => {
     }
 
     // 2. Increase bcrypt rounds to 10 for actual security
-    const hashPass = await bcrypt.hash(password, 10);
+    const hashPass = await bcrypt.hash(password, 12);
 
     // 3. Force the role to 'admin' so users can't exploit it
     const role = "admin";

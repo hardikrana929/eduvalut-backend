@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const sendEmail = require("../utils/sendEmail");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 //Forgot Password
 const forgotPassword = async (req, res) => {
@@ -20,7 +21,8 @@ const forgotPassword = async (req, res) => {
             })
         }
         //Generate OTP
-        const otp = Math.floor(100000 + Math.random() * 900000);
+        const crypto = require('crypto');
+        const otp = crypto.randomInt(100000, 999999);
 
         //Expire after 5 minutes
         const expireTime = new Date(Date.now() + 5 * 60 * 1000);
@@ -75,6 +77,12 @@ const verifyOtp = async (req, res) => {
 const resetPassword = async (req, res) => {
     try {
         const { email, newPassword } = req.body;
+        const [rows] = await db.query(
+            "SELECT * FROM password_reset WHERE email=? AND verified=true", [email]
+        );
+        if (rows.length === 0) {
+            return res.status(403).json({ message: "OTP not verified" });
+        }
         if (!email || !newPassword) {
             return res.status(400).json({ message: "All Fields are required." });
         }
