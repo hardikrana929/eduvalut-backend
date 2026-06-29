@@ -46,7 +46,7 @@ const adminGuard = (req, res, next) => {
 };
 router.post("/signup-admin", signupLimiter, adminGuard, adminSignup);
 
-router.get("/me", getMe);
+router.get("/me", authMiddleware, getMe);
 router.post("/login-student", loginLimiter, studentLogin);
 
 router.post('/logout', logoutUser);
