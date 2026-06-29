@@ -168,4 +168,22 @@ const logoutUser = (req, res) => {
   });
   return res.status(200).json({ message: "Logged out." });
 };
-module.exports = { stdSignup, adminSignup, studentLogin, logoutUser };
+
+//GetMe
+const getMe = async (req, res) => {
+  try {
+    const [rows] = await con.execute(
+      "SELECT id, fullname, email, role FROM users WHERE id = ?",
+      [req.user.id]
+    );
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "User not found." });
+    }
+    return res.status(200).json({ user: rows[0] });
+  } catch (error) {
+    console.error('[getMe]', error);
+    return res.status(500).json({ message: "Something went wrong." });
+  }
+};
+
+module.exports = { stdSignup, adminSignup, studentLogin, logoutUser, getMe };

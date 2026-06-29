@@ -3,7 +3,7 @@ const middleware = require('../middleware/AuthMiddlware');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 const rateLimit = require('express-rate-limit');
-
+const authMiddleware = require("../middleware/AuthMiddlware");
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // Limit each IP to 10 login requests per window
@@ -20,6 +20,7 @@ const {
   adminSignup,
   studentLogin,
   logoutUser,
+  getMe,
 } = require("../Controllers/StdController");
 
 router.post("/signup-student", signupLimiter,
@@ -45,6 +46,7 @@ const adminGuard = (req, res, next) => {
 };
 router.post("/signup-admin", signupLimiter, adminGuard, adminSignup);
 
+router.get("/me", authMiddleware, getMe);
 router.post("/login-student", loginLimiter, studentLogin);
 
 router.post('/logout', logoutUser);
