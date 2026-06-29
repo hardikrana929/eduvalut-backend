@@ -92,17 +92,27 @@ const studentLogin = async (req, res) => {
       },
     );
 
-    // SUCCESS RESPONSE
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
     return res.status(200).json({
       message: "Login Successful",
-      token,
-      user: {
-        id: user.id,
-        fullname: user.fullname,
-        email: user.email,
-        role: user.role,
-      },
+      user: { id: user.id, fullname: user.fullname, email: user.email, role: user.role },
     });
+    // SUCCESS RESPONSE
+    // return res.status(200).json({
+    //   message: "Login Successful",
+    //   token,
+    //   user: {
+    //     id: user.id,
+    //     fullname: user.fullname,
+    //     email: user.email,
+    //     role: user.role,
+    //   },
+    // });
   } catch (error) {
     console.error('[controllerName.functionName]', error); // server log only
     return res.status(500).json({ message: "Something went wrong. Please try again." });
@@ -148,4 +158,14 @@ const adminSignup = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
-module.exports = { stdSignup, adminSignup, studentLogin };
+
+//Logout 
+const logoutUser = (req, res) => {
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none'
+  });
+  return res.status(200).json({ message: "Logged out." });
+};
+module.exports = { stdSignup, adminSignup, studentLogin, logoutUser };

@@ -1,6 +1,6 @@
 const path = require("path");
 require("dotenv").config();
-
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
 
@@ -38,6 +38,9 @@ app.use(helmet.contentSecurityPolicy({
     frameSrc: ["'self'", supabaseDomain],
   }
 }));
+
+//Cookie Parse
+app.use(cookieParser());
 
 // CORS
 app.use(cors({
